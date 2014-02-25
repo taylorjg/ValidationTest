@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Validation Test</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="style/ValidationTest.css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="script/ValidationTest.js"></script>
+
+</head>
+<body>
+    <form class="container" method="post">
+
+        <h2>Contact Details</h2>
+
+        <div class="row" id="contactDetailsSection">
+            <div class="col-md-offset-1 col-md-10">
+                <table class="table table-striped">
+                    <tr>
+                        <td>FirstName<span class="requiredField">*</span></td>
+                        <td><input name="firstName" type="text" class="inputField"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>LastName<span class="requiredField">*</span></td>
+                        <td><input name="lastName" type="text" class="inputField"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Email<span class="requiredField">*</span></td>
+                        <td><input name="email" type="text" class="inputField"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Credit card number<span class="requiredField">*</span></td>
+                        <td><input name="creditCardNumber" type="text" class="inputField"></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <hr />
+
+        <h2>Delivery Address</h2>
+
+        <div class="row" id="deliveryAddressSection">
+            <div class="col-md-offset-1 col-md-10">
+                <table class="table table-striped">
+                    <tr>
+                        <td>Address Line 1<span class="requiredField">*</span></td>
+                        <td><input name="addressLine1" type="text" class="inputField"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Address Line 2</td>
+                        <td><input name="addressLine2" type="text" class="inputField"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>County</td>
+                        <td><input name="county" type="text" class="inputField"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>PostCode<span class="requiredField">*</span></td>
+                        <td><input name="postCode" type="text" class="inputField"></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-offset-3 col-md-6">
+                <button type="submit" class="btn btn-sm btn-primary pull-right">Submit</button>
+            </div>
+        </div>
+
+    </form>
+
+</body>
+</html>
