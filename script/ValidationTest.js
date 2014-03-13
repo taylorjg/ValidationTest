@@ -9,7 +9,7 @@
     $(document).ready(function() {
 
         var $outputPanel = $("#outputPanel");
-        var _validator;
+        var _submitClicked = false;
 
         var _logMessage = function(message) {
             var existingText = $.trim($outputPanel.html());
@@ -34,7 +34,13 @@
             _reset(true /* clearFieldsToo */);
         });
 
-        _validator = $("form").validate({
+        $("#submitBtn").click(function() {
+            _submitClicked = true;
+            _ignorePristineSections();
+            _logMessage("submitBtn click handler");
+        });
+
+        var _validator = $("form").validate({
                 errorClass: "myerror",
                 errorPlacement: function(error, element) {
                     error.addClass("alert");
@@ -78,44 +84,15 @@
             }
         });
 
-//        var _validateContactSection = function() {
-//            var oldIgnoreSelector = _validator.settings.ignore;
-//            _validator.settings.ignore = "#deliveryAddressSection :input";
-//            var result = _validator.form();
-//            _validator.settings.ignore = oldIgnoreSelector;
-//            return result;
-//        };
-//
-//        var _validateDeliveryAddressSection = function() {
-//            var oldIgnoreSelector = _validator.settings.ignore;
-//            _validator.settings.ignore = "#contactDetailsSection :input";
-//            var result = _validator.form();
-//            _validator.settings.ignore = oldIgnoreSelector;
-//            return result;
-//        };
+        var _defaultIgnoreSelector = _validator.settings.ignore;
 
         var _saveSection = function(sectionName) {
             _logMessage("saving section " + sectionName);
         };
 
         var _validateAndSaveSectionIfValid = function(sectionName) {
-            var isValid = false;
-//            switch (sectionName) {
-//                case "contact":
-//                    isValid = _validateContactSection();
-//                    break;
-//                case "deliveryAddress":
-//                    isValid = _validateDeliveryAddressSection();
-//                    break;
-//                default:
-//                    _logMessage("Unknown section, dude!");
-//                    break;
-//            }
-
             _ignorePristineSections();
-            isValid = _validator.form();
-
-            if (isValid) {
+            if (_validator.form()) {
                 _saveSection(sectionName);
             }
         };
@@ -129,9 +106,14 @@
         };
 
         var _ignorePristineSections = function() {
+            if (_submitClicked) {
+                _validator.settings.ignore = _defaultIgnoreSelector;
+                _logMessage("_validator.settings.ignore: " + _validator.settings.ignore);
+                return;
+            }
             var $dirtySections = $("div[data-validation-model]:not([data-validation-is-dirty])");
             var bits = [];
-            bits.push(":hidden");
+            bits.push(_defaultIgnoreSelector);
             $dirtySections.each(function() {
                 var $dirtySection = $(this);
                 var bit = "#" + $dirtySection.attr("id") + " :input";
