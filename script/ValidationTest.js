@@ -8,12 +8,23 @@
 
     $(document).ready(function() {
 
+        var $outputPanel = $("#outputPanel");
+
+        var _logMessage = function(message) {
+            var existingText = $.trim($outputPanel.html());
+            var separator = (existingText) ? "<br />" : "";
+            var newText = existingText + separator + message;
+            $outputPanel.html(newText);
+            $outputPanel.show();
+        };
+
         $("form").validate({
                 errorClass: "myerror",
                 errorPlacement: function(error, element) {
                     error.addClass("alert");
                     error.addClass("alert-warning");
                     error.appendTo(element.closest("td").next("td"));
+                    _logMessage(error.html());
                 },
                 rules: {
                 // contactDetailsSection
@@ -51,5 +62,7 @@
                 }
             }
         });
+
+        $outputPanel.hide();
     });
 }());
